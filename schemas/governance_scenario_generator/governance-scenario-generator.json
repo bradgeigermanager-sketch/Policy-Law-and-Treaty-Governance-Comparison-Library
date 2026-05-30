@@ -1,0 +1,21 @@
+{
+  "engine_id": "governance_scenario_generator",
+  "version": "1.0.0",
+  "inputs": {
+    "goal": "reduce_conflicts | reduce_risk | test_new_treaty | test_new_law | test_new_policy",
+    "constraints": {
+      "jurisdictions": ["jurisdiction.*"],
+      "participants": ["entity.*"],
+      "layers": ["treaty | law | policy"]
+    }
+  },
+  "outputs": {
+    "generated_scenarios": ["scenario.governance.*"]
+  },
+  "execution_order": [
+    "analyze_current_state",
+    "identify_levers",
+    "generate_candidate_scenarios",
+    "rank_scenarios"
+  ]
+}

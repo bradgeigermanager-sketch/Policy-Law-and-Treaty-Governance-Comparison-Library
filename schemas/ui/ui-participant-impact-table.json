@@ -1,0 +1,15 @@
+{
+  "id": "ui.participant_impact_table.*",
+  "rows": [
+    {
+      "participant_id": "entity.*",
+      "display_name": "string",
+      "status": "stable | strained | high_risk",
+      "unified_conflict_count": "integer",
+      "unified_risk_count": "integer",
+      "treaty_status": "stable | strained | high_risk",
+      "law_status": "stable | strained | high_risk",
+      "policy_status": "stable | strained | high_risk"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "$id": "engines/index.json",
+  "title": "Engine Schema Index",
+  "type": "object",
+
+  "description": "Index of all engine schemas in the Governance OS.",
+
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "engine_category": {
+            "type": "string",
+            "enum": [
+              "treaty",
+              "law",
+              "policy",
+              "cross_layer",
+              "simulation",
+              "dag"
+            ]
+          }
+        },
+        "required": ["id", "file", "title", "engine_category"]
+      }
+    }
+  },
+
+  "required": ["schemas"],
+
+  "schemas": [
+    {
+      "id": "participant_treaty_impact_simulator",
+      "file": "treaty/participant-treaty-impact-simulator.json",
+      "title": "Participant Treaty Impact Simulator",
+      "engine_category": "treaty"
+    },
+    {
+      "id": "cross_treaty_optimization_engine",
+      "file": "treaty/cross-treaty-optimization-engine.json",
+      "title": "Cross-Treaty Optimization Engine",
+      "engine_category": "treaty"
+    },
+    {
+      "id": "participant_law_impact_simulator",
+      "file": "law/participant-law-impact-simulator.json",
+      "title": "Participant Law Impact Simulator",
+      "engine_category": "law"
+    },
+    {
+      "id": "cross_law_optimization_engine",
+      "file": "law/cross-law-optimization-engine.json",
+      "title": "Cross-Law Optimization Engine",
+      "engine_category": "law"
+    },
+    {
+      "id": "law_harmonization_engine",
+      "file": "law/law-harmonization-engine.json",
+      "title": "Law Harmonization Engine",
+      "engine_category": "law"
+    },
+    {
+      "id": "policy_impact_engine",
+      "file": "policy/policy-impact-engine.json",
+      "title": "Policy Impact Engine",
+      "engine_category": "policy"
+    },
+    {
+      "id": "law_treaty_interaction_engine",
+      "file": "cross-layer/law-treaty-interaction-engine.json",
+      "title": "Law–Treaty Interaction Engine",
+      "engine_category": "cross_layer"
+    },
+    {
+      "id": "cross_layer_impact_aggregation_engine",
+      "file": "cross-layer/cross-layer-impact-aggregation-engine.json",
+      "title": "Cross-Layer Impact Aggregation Engine",
+      "engine_category": "cross_layer"
+    },
+    {
+      "id": "unified_participant_impact_engine",
+      "file": "cross-layer/unified-participant-impact-engine.json",
+      "title": "Unified Participant Impact Engine",
+      "engine_category": "cross_layer"
+    },
+    {
+      "id": "unified_participant_impact_timeslice_engine",
+      "file": "cross-layer/unified-participant-impact-timeslice-engine.json",
+      "title": "Unified Participant Impact Timeslice Engine",
+      "engine_category": "cross_layer"
+    },
+    {
+      "id": "global_risk_heatmap_engine",
+      "file": "cross-layer/global-risk-heatmap-engine.json",
+      "title": "Global Risk Heatmap Engine",
+      "engine_category": "cross_layer"
+    },
+    {
+      "id": "governance_simulation_engine",
+      "file": "simulation/governance-simulation-engine.json",
+      "title": "Governance Simulation Engine",
+      "engine_category": "simulation"
+    },
+    {
+      "id": "governance_scenario_generator",
+      "file": "simulation/governance-scenario-generator.json",
+      "title": "Governance Scenario Generator",
+      "engine_category": "simulation"
+    },
+    {
+      "id": "version_aware_governance_dag",
+      "file": "dag/version-aware-governance-dag.json",
+      "title": "Version-Aware Governance DAG",
+      "engine_category": "dag"
+    }
+  ]
+}

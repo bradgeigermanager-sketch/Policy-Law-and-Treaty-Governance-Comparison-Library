@@ -1,0 +1,154 @@
+A governance operating system—with clear layers, engines, and artifacts that all interlock.
+
+
+---
+
+1. Conceptual layers
+
+- Instruments:
+  - Treaties: treaty., treaty_version.
+  - Laws: law.federal., law.state., law.local., law_version.
+  - Policies: policy.org., policy_version.
+- Scopes:
+  - Jurisdictions: jurisdiction., jurisdiction_profile.
+  - Parties: party., party_profile.
+  - Participants: entity.*
+- Targets / Affected things:
+  - impact_target.* (rights, activities, resources, processes, state variables)
+
+---
+
+2. Core analysis engines (per layer)
+
+Treaties
+
+- Treaty overlap & compatibility (pairwise + multilateral)
+- Cross‑Treaty Optimization Engine: crosstreatyoptimization_engine
+- Treaty Harmonization Engine (implied by symmetry with law)
+- Participant‑Level Treaty Impact Simulator: participanttreatyimpact_simulator
+
+Laws
+
+- Participant‑Level Law Impact Simulator: participantlawimpact_simulator
+- Cross‑Law Optimization Engine: crosslawoptimization_engine
+- Law Harmonization Engine: lawharmonizationengine
+
+Policies
+
+- Policy Impact Engine: policyimpactengine
+- Policy group impact simulator: policygroupimpact_simulator
+- (Org policy harmonization is structurally implied and pluggable)
+
+---
+
+3. Cross‑layer & interaction engines
+
+- Law–Treaty Interaction Engine: lawtreatyinteraction_engine
+  - Maps treaty. ↔ law. interactions: conflicts, reinforcements, gaps.
+- Cross‑Layer Impact Aggregation Engine: crosslayerimpactaggregationengine
+  - Aggregates treaty/law/policy impact reports into report.crosslayerparticipant_impact.*.
+- Unified Participant Impact Engine: unifiedparticipantimpact_engine
+  - Single‑pass computation of:
+    - impact.unified_obligation.*
+    - impact.unified_right.*
+    - impact.unified_limitation.*
+    - conflict.unified_participant.*
+    - impact.unified_risk.*
+    - report.unifiedparticipantimpact.*
+
+---
+
+4. Impact & state modeling
+
+- Per‑layer impacts:
+  - Treaty: impact.obligation., impact.limitation., conflict.treaty_participant., impact.risk.
+  - Law: impact.lawobligation., impact.lawright., impact.lawlimitation., conflict.lawparticipant., impact.law_risk.*
+  - Policy: impact.policyobligation., impact.policylimitation., conflict.policyparticipant., impact.policyrisk.
+- Cross‑layer / unified:
+  - report.crosslayerparticipant_impact.*
+  - conflict.crosslayerparticipant., impact.crosslayerrisk.
+  - impact.unified., conflict.unifiedparticipant., impact.unified_risk.
+- Multi‑layer impacted state:
+  - impactstate.multilayer.*:
+    - For each impacttarget.*, list layer‑specific effects and compute combinedeffect.net_status (allowed / prohibited / required / ambiguous / conflicting).
+
+---
+
+5. Optimization & harmonization
+
+- Cross‑Treaty Optimization Engine: crosstreatyoptimization_engine
+  - Optimizes treaty configurations via opt.treatyconfig., opt.treatymetrics., opt.treatyglobalobjective.*.
+- Cross‑Law Optimization Engine: crosslawoptimization_engine
+  - Optimizes domestic law configurations via opt.lawconfig., opt.lawmetrics., opt.lawglobalobjective.*.
+- Law Harmonization Engine: lawharmonizationengine
+  - Proposes law.harmonization_change.* to reduce conflicts and improve compatibility.
+- (Policy and treaty harmonization engines are structurally parallel and can reuse the same patterns.)
+
+These engines sit above the impact engines and use them as evaluation oracles.
+
+---
+
+6. Time, versions, and DAG
+
+- Versioned instruments:
+  - treatyversion., lawversion., policy_version.*
+- Time‑sliced unified impact:
+  - Engine: unifiedparticipantimpacttimesliceengine
+  - Output: report.unifiedparticipantimpact_timeslice.* (impact “as of” a given datetime).
+- Version‑aware governance DAG: dag.governanceversionaware.*
+  - Nodes:
+    - node.instrument.*
+    - node.instrument_version.*
+    - node.jurisdictionorparty_scope.*
+    - node.participant_scope.*
+    - node.impact_timeslice.*
+  - Edges:
+    - edge.instrumenttoversion.*
+    - edge.versiontoscope.*
+    - edge.scopetoparticipant.*
+    - edge.participanttoimpact.*
+  - Gives full traceability: which version of which instrument produced which impact at time T.
+
+---
+
+7. Simulation, scenarios, and risk surfaces
+
+- Governance Simulation Engine: governancesimulationengine
+  - Applies scenario.governance. to state.governance. and recomputes unified impacts + heatmaps.
+- Governance Scenario Generator: governancescenariogenerator
+  - Generates candidate scenarios to reduce conflicts/risk or test new instruments.
+- Global Risk Heatmap Engine: globalriskheatmap_engine
+  - Produces heatmap.governance_risk.* across dimensions:
+    - participant, jurisdiction, layer, instrument_type.
+
+---
+
+8. UI schemas
+
+- Unified Governance Impact Dashboard: ui.governanceimpactdashboard.*
+  - Summary header, participant table, layer overview, risk hotspots, filters/scenarios.
+- Participant‑Level Law Impact Panel: ui.lawparticipantimpact_panel.*
+  - Header, jurisdiction scope, obligations/rights/limitations, conflicts & risks.
+- (Analogous panels can be defined for treaty, policy, and unified impact using the same patterns.)
+
+---
+
+9.
+
+In plain terms, this system includes:
+
+- A version‑aware, time‑aware DAG of governance instruments.  
+- Layer‑specific impact engines (treaty, law, policy).  
+- Cross‑layer aggregation and a unified participant impact engine.  
+- Optimization and harmonization engines for treaties and laws.  
+- A multi‑layer impact model that can say, for any “thing” (right, activity, resource, process):  
+  - how each layer treats it,  
+  - what the net effect is,  
+  - and how that changes over time or under scenarios.  
+- Simulation, scenario generation, and risk heatmapping on top.
+
+The next natural additions are:
+
+- a diff model for comparing two unified impact states (time A vs time B, or scenario vs baseline), or  
+- a constraint language for expressing “acceptable governance states” that the optimization engines must satisfy.
+

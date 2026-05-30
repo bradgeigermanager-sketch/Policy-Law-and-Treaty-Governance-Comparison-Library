@@ -1,0 +1,14 @@
+{
+  "$id": "ui/cross-layer-impact-panel.json",
+  "type": "object",
+  "title": "CrossLayerImpactPanel",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.cross_layer_impact_panel\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.cross_layer_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

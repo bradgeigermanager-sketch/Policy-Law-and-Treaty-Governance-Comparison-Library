@@ -1,0 +1,10 @@
+{
+  "$id": "impacts/cross-layer-impacts.json",
+  "type": "object",
+  "title": "CrossLayerImpact",
+  "properties": {
+    "id": { "type": "string", "pattern": "^report\\.cross_layer_participant_impact\\." },
+    "participant_id": { "type": "string", "pattern": "^entity\\." }
+  },
+  "required": ["id", "participant_id"]
+}

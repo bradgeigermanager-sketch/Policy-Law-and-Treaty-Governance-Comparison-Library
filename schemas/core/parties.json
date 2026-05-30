@@ -1,0 +1,11 @@
+{
+  "$id": "core/parties.json",
+  "type": "object",
+  "title": "Party",
+  "properties": {
+    "id": { "type": "string", "pattern": "^party\\." },
+    "label": { "type": "string" },
+    "kind": { "type": "string", "enum": ["state", "organization", "bloc"] }
+  },
+  "required": ["id", "label", "kind"]
+}

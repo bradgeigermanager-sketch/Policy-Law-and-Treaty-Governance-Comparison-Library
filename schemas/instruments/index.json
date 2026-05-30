@@ -1,0 +1,74 @@
+{
+  "$id": "instruments/index.json",
+  "title": "Instrument Schema Index",
+  "type": "object",
+
+  "description": "Index of all instrument schemas in the Governance OS.",
+
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "instrument_type": {
+            "type": "string",
+            "enum": [
+              "treaty",
+              "treaty_version",
+              "law",
+              "law_version",
+              "policy",
+              "policy_version"
+            ]
+          }
+        },
+        "required": ["id", "file", "title", "instrument_type"]
+      }
+    }
+  },
+
+  "required": ["schemas"],
+
+  "schemas": [
+    {
+      "id": "treaty",
+      "file": "treaties.json",
+      "title": "Treaty",
+      "instrument_type": "treaty"
+    },
+    {
+      "id": "treaty_version",
+      "file": "treaty-versions.json",
+      "title": "Treaty Version",
+      "instrument_type": "treaty_version"
+    },
+    {
+      "id": "law",
+      "file": "laws.json",
+      "title": "Law",
+      "instrument_type": "law"
+    },
+    {
+      "id": "law_version",
+      "file": "law-versions.json",
+      "title": "Law Version",
+      "instrument_type": "law_version"
+    },
+    {
+      "id": "policy",
+      "file": "policies.json",
+      "title": "Policy",
+      "instrument_type": "policy"
+    },
+    {
+      "id": "policy_version",
+      "file": "policy-versions.json",
+      "title": "Policy Version",
+      "instrument_type": "policy_version"
+    }
+  ]
+}

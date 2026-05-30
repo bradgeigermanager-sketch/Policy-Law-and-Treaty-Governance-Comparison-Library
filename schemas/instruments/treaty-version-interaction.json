@@ -1,0 +1,7 @@
+{
+  "id": "treaty_version_interaction.*",
+  "treaty_versions": ["treaty_version.*"],
+  "parties_overlap": ["party.*"],
+  "interaction_type": "supersession | coexistence | conflict",
+  "description": "string"
+}

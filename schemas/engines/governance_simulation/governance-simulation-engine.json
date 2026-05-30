@@ -1,0 +1,19 @@
+{
+  "engine_id": "governance_simulation_engine",
+  "version": "1.0.0",
+  "inputs": {
+    "baseline_state": "state.governance.*",
+    "scenario": "scenario.governance.*"
+  },
+  "outputs": {
+    "simulated_unified_impacts": ["report.unified_participant_impact.*"],
+    "simulated_risk_heatmap": "heatmap.governance_risk.*",
+    "simulation_trace": ["sim.trace.*"]
+  },
+  "execution_order": [
+    "apply_scenario_to_state",
+    "recompute_unified_impacts",
+    "recompute_risk_heatmap",
+    "emit_results"
+  ]
+}

@@ -1,0 +1,73 @@
+name: Documentation Builder
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install tools
+        run: |
+          npm install -g json-schema-ref-parser
+          npm install -g json-schema-to-markdown
+          mkdir -p docs/generated
+
+      - name: Generate Markdown docs for each schema
+        run: |
+          echo "Generating Markdown documentation..."
+          find schemas -name "*.json" | while read schema; do
+            base=$(basename "$schema" .json)
+            out="docs/generated/$base.md"
+            json-schema-to-markdown "$schema" > "$out"
+          done
+
+      - name: Build schema reference index
+        run: |
+          echo "# Schema Reference Index" > docs/generated/index.md
+          echo "" >> docs/generated/index.md
+          echo "Generated automatically by GitHub Actions." >> docs/generated/index.md
+          echo "" >> docs/generated/index.md
+
+          find docs/generated -name "*.md" ! -name "index.md" | sort | while read file; do
+            base=$(basename "$file" .md)
+            echo "- [$base](./$base.md)" >> docs/generated/index.md
+          done
+
+      - name: Build navigation tree
+        run: |
+          echo "# Documentation Navigation" > docs/generated/navigation.md
+          echo "" >> docs/generated/navigation.md
+
+          for dir in schemas/*; do
+            if [ -d "$dir" ]; then
+              name=$(basename "$dir")
+              echo "## $name" >> docs/generated/navigation.md
+              echo "" >> docs/generated/navigation.md
+
+              find "$dir" -name "*.json" | sort | while read schema; do
+                base=$(basename "$schema" .json)
+                echo "- [$base](./$base.md)" >> docs/generated/navigation.md
+              done
+
+              echo "" >> docs/generated/navigation.md
+            fi
+          done
+
+      - name: Upload documentation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-os-docs
+          path: docs/generated

@@ -1,0 +1,14 @@
+{
+  "$id": "instruments/law-versions.json",
+  "type": "object",
+  "title": "LawVersion",
+  "properties": {
+    "id": { "type": "string", "pattern": "^law_version\\." },
+    "law_id": { "type": "string", "pattern": "^law\\." },
+    "version": { "type": "string" },
+    "jurisdiction_id": { "type": "string", "pattern": "^jurisdiction\\." },
+    "effective_from": { "type": "string", "format": "date-time" },
+    "effective_to": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "required": ["id", "law_id", "version", "jurisdiction_id", "effective_from"]
+}

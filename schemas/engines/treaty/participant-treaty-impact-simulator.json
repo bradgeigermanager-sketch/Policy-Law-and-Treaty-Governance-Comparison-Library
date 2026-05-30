@@ -1,0 +1,9 @@
+{
+  "$id": "engines/participant-treaty-impact-simulator.json",
+  "type": "object",
+  "title": "ParticipantTreatyImpactSimulator",
+  "properties": {
+    "engine_id": { "const": "participant_treaty_impact_simulator" }
+  },
+  "required": ["engine_id"]
+}

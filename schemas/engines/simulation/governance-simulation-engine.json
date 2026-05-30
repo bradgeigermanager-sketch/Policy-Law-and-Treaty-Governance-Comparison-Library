@@ -1,0 +1,9 @@
+{
+  "$id": "engines/global-risk-heatmap-engine.json",
+  "type": "object",
+  "title": "GlobalRiskHeatmapEngine",
+  "properties": {
+    "engine_id": { "const": "global_risk_heatmap_engine" }
+  },
+  "required": ["engine_id"]
+}

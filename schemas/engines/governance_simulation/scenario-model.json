@@ -1,0 +1,11 @@
+{
+  "id": "scenario.governance.*",
+  "label": "string",
+  "changes": [
+    {
+      "type": "add_treaty | amend_treaty | repeal_treaty | add_law | amend_law | repeal_law | add_policy | amend_policy | repeal_policy | change_participation | change_jurisdiction",
+      "target_id": "treaty.* | law.* | policy.org.* | entity.* | jurisdiction.*",
+      "details": {}
+    }
+  ]
+}

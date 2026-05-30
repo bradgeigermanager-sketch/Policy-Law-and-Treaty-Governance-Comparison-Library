@@ -1,0 +1,64 @@
+name: Schema Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install AJV CLI
+        run: npm install -g ajv-cli
+
+      - name: Validate JSON syntax
+        run: |
+          echo "Checking JSON syntax..."
+          find schemas -name "*.json" -print0 | xargs -0 -n1 jq empty
+
+      - name: Validate JSON Schemas
+        run: |
+          echo "Validating JSON Schemas..."
+          find schemas -name "*.json" -print0 | \
+            xargs -0 -I {} ajv compile -s {}
+
+      - name: Validate examples against schemas
+        run: |
+          echo "Validating examples..."
+          for example in examples/*.json; do
+            schema=$(jq -r '."$schema" // empty' "$example")
+            if [ -n "$schema" ]; then
+              echo "Validating $example against $schema"
+              ajv validate -s "$schema" -d "$example"
+            else
+              echo "Skipping $example (no $schema field)"
+            fi
+          done
+
+      - name: Validate index file references
+        run: |
+          echo "Checking index file references..."
+          for index in schemas/*/index.json; do
+            echo "Validating $index"
+            jq -r '.schemas[].file' "$index" | while read file; do
+              dir=$(dirname "$index")
+              if [ ! -f "$dir/$file" ]; then
+                echo "Missing file referenced in $index: $file"
+                exit 1
+              fi
+            done
+          done
+
+      - name: Success
+        run: echo "All schemas validated successfully."

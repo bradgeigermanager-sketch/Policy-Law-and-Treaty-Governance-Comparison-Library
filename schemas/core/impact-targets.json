@@ -1,0 +1,14 @@
+{
+  "$id": "core/impact-targets.json",
+  "type": "object",
+  "title": "ImpactTarget",
+  "properties": {
+    "id": { "type": "string", "pattern": "^impact_target\\." },
+    "target_type": {
+      "type": "string",
+      "enum": ["right", "obligation", "activity", "resource", "process", "state_variable"]
+    },
+    "label": { "type": "string" }
+  },
+  "required": ["id", "target_type", "label"]
+}

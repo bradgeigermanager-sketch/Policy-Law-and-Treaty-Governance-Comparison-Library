@@ -1,0 +1,98 @@
+{
+  "$id": "ui/index.json",
+  "title": "UI Schema Index",
+  "type": "object",
+
+  "description": "Index of all UI schemas in the Governance OS.",
+
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "description": "List of all UI schema files in this directory.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": ["dashboard", "panel", "viewer", "visualizer"]
+          }
+        },
+        "required": ["id", "file", "title", "kind"]
+      }
+    }
+  },
+
+  "required": ["schemas"],
+
+  "schemas": [
+    {
+      "id": "ui.governance_impact_dashboard",
+      "file": "governance-impact-dashboard.json",
+      "title": "Governance Impact Dashboard",
+      "kind": "dashboard"
+    },
+    {
+      "id": "ui.law_participant_impact_panel",
+      "file": "law-participant-impact-panel.json",
+      "title": "Law Participant Impact Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.treaty_participant_impact_panel",
+      "file": "treaty-participant-impact-panel.json",
+      "title": "Treaty Participant Impact Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.policy_participant_impact_panel",
+      "file": "policy-participant-impact-panel.json",
+      "title": "Policy Participant Impact Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.unified_participant_impact_panel",
+      "file": "unified-participant-impact-panel.json",
+      "title": "Unified Participant Impact Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.cross_layer_impact_panel",
+      "file": "cross-layer-impact-panel.json",
+      "title": "Cross-Layer Impact Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.risk_hotspots_panel",
+      "file": "risk-hotspots-panel.json",
+      "title": "Risk Hotspots Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.scenario_builder_panel",
+      "file": "scenario-builder-panel.json",
+      "title": "Scenario Builder Panel",
+      "kind": "panel"
+    },
+    {
+      "id": "ui.timeline_impact_viewer",
+      "file": "timeline-impact-viewer.json",
+      "title": "Timeline Impact Viewer",
+      "kind": "viewer"
+    },
+    {
+      "id": "ui.version_diff_viewer",
+      "file": "version-diff-viewer.json",
+      "title": "Version Diff Viewer",
+      "kind": "viewer"
+    },
+    {
+      "id": "ui.governance_dag_visualizer",
+      "file": "governance-dag-visualizer.json",
+      "title": "Governance DAG Visualizer",
+      "kind": "visualizer"
+    }
+  ]
+}

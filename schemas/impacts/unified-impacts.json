@@ -1,0 +1,10 @@
+{
+  "$id": "impacts/unified-impacts.json",
+  "type": "object",
+  "title": "UnifiedImpact",
+  "properties": {
+    "id": { "type": "string", "pattern": "^report\\.unified_participant_impact" },
+    "participant_id": { "type": "string", "pattern": "^entity\\." }
+  },
+  "required": ["id", "participant_id"]
+}

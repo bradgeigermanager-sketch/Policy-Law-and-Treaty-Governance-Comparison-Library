@@ -1,0 +1,9 @@
+{
+  "$id": "engines/governance-scenario-generator.json",
+  "type": "object",
+  "title": "GovernanceScenarioGenerator",
+  "properties": {
+    "engine_id": { "const": "governance_scenario_generator" }
+  },
+  "required": ["engine_id"]
+}

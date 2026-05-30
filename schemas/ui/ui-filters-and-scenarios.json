@@ -1,0 +1,15 @@
+{
+  "id": "ui.filters_and_scenarios.*",
+  "filters": {
+    "layers": ["treaty | law | policy"],
+    "jurisdictions": ["jurisdiction.*"],
+    "participants": ["entity.*"],
+    "risk_levels": ["low | medium | high"]
+  },
+  "scenario_actions": [
+    {
+      "id": "action.run_scenario",
+      "target": "governance_scenario_generator"
+    }
+  ]
+}

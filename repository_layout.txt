@@ -1,0 +1,57 @@
+governance-os/
+├─ README.md
+├─ docs/
+│  ├─ overview.md
+│  ├─ layers.md
+│  ├─ engines.md
+│  ├─ versioning-and-time.md
+│  └─ ui.md
+├─ schemas/
+│  ├─ core/
+│  │  ├─participants.json
+│  │  ├─jurisdictions.json
+│  │  ├─parties.json
+│  │  └─impact-targets.json
+│  ├─instruments/
+│  │  ├─treaties.json
+│  │  ├─treaty-versions.json
+│  │  ├─laws.json
+│  │  ├─law-versions.json
+│  │  ├─policies.json
+│  │  └─policy-versions.json
+│  ├─impacts/
+│  │  ├─treaty-impacts.json
+│  │  ├─law-impacts.json
+│  │  ├─policy-impacts.json
+│  │  ├─cross-layer-impacts.json
+│  │  └─unified-impacts.json
+│  ├─engines/
+│  │  ├─treaty/
+│  │  │  ├─participant-treaty-impact-simulator.json
+│  │  │  └─cross-treaty-optimization-engine.json
+│  │  ├─law/
+│  │  │  ├─participant-law-impact-simulator.json
+│  │  │  ├─cross-law-optimization-engine.json
+│  │  │  └─law-harmonization-engine.json
+│  │  ├─policy/
+│  │  │  └─policy-impact-engine.json
+│  │  ├─cross-layer/
+│  │  │  ├─law-treaty-interaction-engine.json
+│  │  │  ├─cross-layer-impact-aggregation-engine.json
+│  │  │  ├─unified-participant-impact-engine.json
+│  │  │  ├─unified-participant-impact-timeslice-engine.json
+│  │  │  └─global-risk-heatmap-engine.json
+│  │  ├─simulation/
+│  │  │  ├─governance-simulation-engine.json
+│  │  │  └─governance-scenario-generator.json
+│  │  └─dag/
+│  │     └─version-aware-governance-dag.json
+│  └─ui/
+│     ├─governance-impact-dashboard.json
+│     └─law-participant-impact-panel.json
+└─ examples/
+   ├─ sample-treaty.json
+   ├─ sample-law.json
+   ├─ sample-policy.json
+   ├─ sample-participant.json
+   └─ sample-scenario.json

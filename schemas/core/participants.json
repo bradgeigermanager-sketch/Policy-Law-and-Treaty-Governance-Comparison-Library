@@ -1,0 +1,11 @@
+{
+  "$id": "core/participants.json",
+  "type": "object",
+  "title": "Participant",
+  "properties": {
+    "id": { "type": "string", "pattern": "^entity\\." },
+    "display_name": { "type": "string" },
+    "attributes": { "type": "object" }
+  },
+  "required": ["id", "display_name"]
+}

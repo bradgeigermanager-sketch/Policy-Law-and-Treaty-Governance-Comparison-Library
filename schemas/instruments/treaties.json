@@ -1,0 +1,14 @@
+{
+  "$id": "instruments/treaties.json",
+  "type": "object",
+  "title": "Treaty",
+  "properties": {
+    "id": { "type": "string", "pattern": "^treaty\\." },
+    "label": { "type": "string" },
+    "parties": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^party\\." }
+    }
+  },
+  "required": ["id", "label"]
+}

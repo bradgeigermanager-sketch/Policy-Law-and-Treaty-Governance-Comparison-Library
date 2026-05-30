@@ -1,0 +1,92 @@
+name: Schema Dependency Graph
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-schema-graph:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install tools
+        run: |
+          npm install -g ajv-cli
+          sudo apt-get update
+          sudo apt-get install -y graphviz jq
+
+      - name: Build schema dependency list
+        run: |
+          echo "Building schema dependency graph..."
+          mkdir -p artifacts
+
+          # Collect all schemas
+          find schemas -name "*.json" > artifacts/schema-files.txt
+
+          # Build dependency graph JSON
+          echo '{ "schemas": [' > artifacts/schema-deps.json
+          first=true
+          while read file; do
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo ',' >> artifacts/schema-deps.json
+            fi
+
+            refs=$(jq -r '.. | ."${ref}"? // empty' "$file" | sed 's/#.*//' | sort -u)
+            echo '{' >> artifacts/schema-deps.json
+            echo '"file": "'"$file"'",' >> artifacts/schema-deps.json
+            echo '"references": [' >> artifacts/schema-deps.json
+
+            ref_first=true
+            for r in $refs; do
+              if [ "$ref_first" = true ]; then
+                ref_first=false
+              else
+                echo ',' >> artifacts/schema-deps.json
+              fi
+              echo '"'$r'"' >> artifacts/schema-deps.json
+            done
+
+            echo ']}' >> artifacts/schema-deps.json
+          done < artifacts/schema-files.txt
+          echo ']}' >> artifacts/schema-deps.json
+
+      - name: Generate GraphViz DOT file
+        run: |
+          echo "Generating DOT graph..."
+          echo "digraph SchemaDeps {" > artifacts/schema-deps.dot
+          echo "  rankdir=LR;" >> artifacts/schema-deps.dot
+
+          jq -r '.schemas[] | .file as $f | .references[]? | "  \"" + $f + "\" -> \"" + . + "\";"' artifacts/schema-deps.json >> artifacts/schema-deps.dot
+
+          echo "}" >> artifacts/schema-deps.dot
+
+      - name: Render SVG graph
+        run: |
+          dot -Tsvg artifacts/schema-deps.dot -o artifacts/schema-deps.svg
+
+      - name: Generate Markdown report
+        run: |
+          echo "# Schema Dependency Graph" > artifacts/schema-deps.md
+          echo "" >> artifacts/schema-deps.md
+          echo "Generated automatically by GitHub Actions." >> artifacts/schema-deps.md
+          echo "" >> artifacts/schema-deps.md
+          echo "## Dependency List" >> artifacts/schema-deps.md
+          jq -r '.schemas[] | "- **\(.file)** → \(.references | join(", "))"' artifacts/schema-deps.json >> artifacts/schema-deps.md
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema-dependency-graph
+          path: artifacts/

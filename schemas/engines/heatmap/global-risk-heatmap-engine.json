@@ -1,0 +1,17 @@
+{
+  "engine_id": "global_risk_heatmap_engine",
+  "version": "1.0.0",
+  "inputs": {
+    "unified_impacts": ["report.unified_participant_impact.*"],
+    "cross_layer_risks": ["impact.cross_layer_risk.*"]
+  },
+  "outputs": {
+    "risk_heatmap": "heatmap.governance_risk.*"
+  },
+  "execution_order": [
+    "collect_risks",
+    "aggregate_by_dimension",
+    "compute_heat_levels",
+    "emit_heatmap"
+  ]
+}

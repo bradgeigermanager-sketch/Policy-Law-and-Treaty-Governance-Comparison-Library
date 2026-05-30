@@ -1,0 +1,11 @@
+{
+  "$id": "core/jurisdictions.json",
+  "type": "object",
+  "title": "Jurisdiction",
+  "properties": {
+    "id": { "type": "string", "pattern": "^jurisdiction\\." },
+    "label": { "type": "string" },
+    "kind": { "type": "string", "enum": ["federal", "state", "local", "supranational"] }
+  },
+  "required": ["id", "label", "kind"]
+}

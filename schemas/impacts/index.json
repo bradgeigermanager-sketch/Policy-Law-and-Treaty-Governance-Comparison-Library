@@ -1,0 +1,74 @@
+{
+  "$id": "impacts/index.json",
+  "title": "Impact Schema Index",
+  "type": "object",
+
+  "description": "Index of all impact schemas in the Governance OS.",
+
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "impact_type": {
+            "type": "string",
+            "enum": [
+              "treaty_impact",
+              "law_impact",
+              "policy_impact",
+              "cross_layer_impact",
+              "unified_impact",
+              "multi_layer_state"
+            ]
+          }
+        },
+        "required": ["id", "file", "title", "impact_type"]
+      }
+    }
+  },
+
+  "required": ["schemas"],
+
+  "schemas": [
+    {
+      "id": "treaty_impact",
+      "file": "treaty-impacts.json",
+      "title": "Treaty Impacts",
+      "impact_type": "treaty_impact"
+    },
+    {
+      "id": "law_impact",
+      "file": "law-impacts.json",
+      "title": "Law Impacts",
+      "impact_type": "law_impact"
+    },
+    {
+      "id": "policy_impact",
+      "file": "policy-impacts.json",
+      "title": "Policy Impacts",
+      "impact_type": "policy_impact"
+    },
+    {
+      "id": "cross_layer_impact",
+      "file": "cross-layer-impacts.json",
+      "title": "Cross-Layer Impacts",
+      "impact_type": "cross_layer_impact"
+    },
+    {
+      "id": "unified_impact",
+      "file": "unified-impacts.json",
+      "title": "Unified Impacts",
+      "impact_type": "unified_impact"
+    },
+    {
+      "id": "multi_layer_state",
+      "file": "multi-layer-impact-state.json",
+      "title": "Multi-Layer Impact State",
+      "impact_type": "multi_layer_state"
+    }
+  ]
+}

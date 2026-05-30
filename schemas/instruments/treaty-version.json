@@ -1,0 +1,9 @@
+{
+  "id": "treaty_version.*",
+  "treaty_id": "treaty.*",
+  "version": "string",
+  "effective_from": "datetime",
+  "effective_to": "datetime | null",
+  "parties": ["party.*"],
+  "text_ref": "doc.*"
+}

@@ -1,0 +1,11 @@
+{
+  "$id": "instruments/policies.json",
+  "type": "object",
+  "title": "Policy",
+  "properties": {
+    "id": { "type": "string", "pattern": "^policy\\.org\\." },
+    "label": { "type": "string" },
+    "organization_id": { "type": "string", "pattern": "^org\\." }
+  },
+  "required": ["id", "label", "organization_id"]
+}

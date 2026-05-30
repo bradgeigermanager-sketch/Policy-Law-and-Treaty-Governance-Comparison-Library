@@ -1,0 +1,11 @@
+{
+  "id": "ui.governance_impact_dashboard.*",
+  "type": "dashboard",
+  "sections": [
+    "ui.governance_summary_header.*",
+    "ui.participant_impact_table.*",
+    "ui.layer_status_overview.*",
+    "ui.risk_hotspots_panel.*",
+    "ui.filters_and_scenarios.*"
+  ]
+}

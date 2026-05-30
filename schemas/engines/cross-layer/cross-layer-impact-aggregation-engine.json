@@ -1,0 +1,9 @@
+{
+  "$id": "engines/cross-layer-impact-aggregation-engine.json",
+  "type": "object",
+  "title": "CrossLayerImpactAggregationEngine",
+  "properties": {
+    "engine_id": { "const": "cross_layer_impact_aggregation_engine" }
+  },
+  "required": ["engine_id"]
+}

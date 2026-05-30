@@ -1,0 +1,55 @@
+{
+  "$id": "core/index.json",
+  "title": "Core Schema Index",
+  "type": "object",
+
+  "description": "Index of core entity schemas in the Governance OS.",
+
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "file": { "type": "string" },
+          "title": { "type": "string" },
+          "entity_type": {
+            "type": "string",
+            "enum": ["participant", "jurisdiction", "party", "impact_target"]
+          }
+        },
+        "required": ["id", "file", "title", "entity_type"]
+      }
+    }
+  },
+
+  "required": ["schemas"],
+
+  "schemas": [
+    {
+      "id": "participant",
+      "file": "participants.json",
+      "title": "Participant",
+      "entity_type": "participant"
+    },
+    {
+      "id": "jurisdiction",
+      "file": "jurisdictions.json",
+      "title": "Jurisdiction",
+      "entity_type": "jurisdiction"
+    },
+    {
+      "id": "party",
+      "file": "parties.json",
+      "title": "Party",
+      "entity_type": "party"
+    },
+    {
+      "id": "impact_target",
+      "file": "impact-targets.json",
+      "title": "Impact Target",
+      "entity_type": "impact_target"
+    }
+  ]
+}

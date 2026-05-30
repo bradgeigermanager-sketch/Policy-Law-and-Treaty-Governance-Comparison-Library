@@ -1,0 +1,9 @@
+{
+  "$id": "engines/law-harmonization-engine.json",
+  "type": "object",
+  "title": "LawHarmonizationEngine",
+  "properties": {
+    "engine_id": { "const": "law_harmonization_engine" }
+  },
+  "required": ["engine_id"]
+}

@@ -1,0 +1,14 @@
+{
+  "$id": "ui/governance-impact-dashboard.json",
+  "type": "object",
+  "title": "GovernanceImpactDashboard",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.governance_impact_dashboard\\." },
+    "type": { "const": "dashboard" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\." }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

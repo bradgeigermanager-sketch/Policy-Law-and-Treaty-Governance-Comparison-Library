@@ -1,0 +1,8 @@
+{
+  "id": "law_version.*",
+  "law_id": "law.*",
+  "version": "string",
+  "effective_from": "datetime",
+  "effective_to": "datetime | null",
+  "jurisdiction_id": "jurisdiction.*"
+}

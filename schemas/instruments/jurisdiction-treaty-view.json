@@ -1,0 +1,7 @@
+{
+  "id": "jurisdiction_treaty_view.*",
+  "jurisdiction_id": "jurisdiction.*",
+  "treaty_version_id": "treaty_version.*",
+  "implementation_status": "not_implemented | partially_implemented | fully_implemented",
+  "implementation_laws": ["law.*"]
+}

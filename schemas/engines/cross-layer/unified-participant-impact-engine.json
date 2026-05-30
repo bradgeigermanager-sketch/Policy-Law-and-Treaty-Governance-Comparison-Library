@@ -1,0 +1,55 @@
+{
+  "$id": "engines/unified-participant-impact-engine.json",
+  "type": "object",
+  "title": "UnifiedParticipantImpactEngine",
+  "properties": {
+    "engine_id": { "const": "unified_participant_impact_engine" },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "participant_id": { "type": "string", "pattern": "^entity\\." },
+        "facts": { "type": "array", "items": { "type": "string", "pattern": "^term\\." } },
+        "treaties": { "type": "array", "items": { "type": "string", "pattern": "^treaty\\." } },
+        "treaty_rules": { "type": "array", "items": { "type": "string", "pattern": "^rule\\.treaty\\." } },
+        "federal_laws": { "type": "array", "items": { "type": "string", "pattern": "^law\\.federal\\." } },
+        "state_laws": { "type": "array", "items": { "type": "string", "pattern": "^law\\.state\\." } },
+        "local_laws": { "type": "array", "items": { "type": "string", "pattern": "^law\\.local\\." } },
+        "org_policies": { "type": "array", "items": { "type": "string", "pattern": "^policy\\.org\\." } },
+        "jurisdiction_profile": { "type": "string", "pattern": "^jurisdiction_profile\\." },
+        "party_profile": { "type": "string", "pattern": "^party_profile\\." }
+      },
+      "required": ["participant_id", "facts", "jurisdiction_profile", "party_profile"]
+    },
+    "outputs": {
+      "type": "object",
+      "properties": {
+        "unified_obligations": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^impact\\.unified_obligation\\." }
+        },
+        "unified_rights": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^impact\\.unified_right\\." }
+        },
+        "unified_limitations": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^impact\\.unified_limitation\\." }
+        },
+        "unified_conflicts": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^conflict\\.unified_participant\\." }
+        },
+        "unified_risks": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^impact\\.unified_risk\\." }
+        },
+        "unified_impact_summary": {
+          "type": "string",
+          "pattern": "^report\\.unified_participant_impact\\."
+        }
+      },
+      "required": ["unified_impact_summary"]
+    }
+  },
+  "required": ["engine_id", "inputs", "outputs"]
+}

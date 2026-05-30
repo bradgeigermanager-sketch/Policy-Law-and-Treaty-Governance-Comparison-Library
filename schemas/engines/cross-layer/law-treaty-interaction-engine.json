@@ -1,0 +1,9 @@
+{
+  "$id": "engines/law-treaty-interaction-engine.json",
+  "type": "object",
+  "title": "LawTreatyInteractionEngine",
+  "properties": {
+    "engine_id": { "const": "law_treaty_interaction_engine" }
+  },
+  "required": ["engine_id"]
+}

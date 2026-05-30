@@ -1,0 +1,13 @@
+{
+  "$id": "impacts/law-impacts.json",
+  "type": "object",
+  "title": "LawImpact",
+  "properties": {
+    "id": { "type": "string", "pattern": "^impact\\.law_" },
+    "participant_id": { "type": "string", "pattern": "^entity\\." },
+    "law_id": { "type": "string", "pattern": "^law\\." },
+    "rule_id": { "type": "string", "pattern": "^rule\\.law\\." },
+    "description": { "type": "string" }
+  },
+  "required": ["id", "participant_id", "law_id", "rule_id"]
+}

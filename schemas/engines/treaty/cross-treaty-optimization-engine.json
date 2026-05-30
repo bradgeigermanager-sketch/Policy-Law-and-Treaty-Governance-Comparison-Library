@@ -1,0 +1,9 @@
+{
+  "$id": "engines/cross-treaty-optimization-engine.json",
+  "type": "object",
+  "title": "CrossTreatyOptimizationEngine",
+  "properties": {
+    "engine_id": { "const": "cross_treaty_optimization_engine" }
+  },
+  "required": ["engine_id"]
+}

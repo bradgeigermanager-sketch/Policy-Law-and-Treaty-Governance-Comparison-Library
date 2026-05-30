@@ -1,0 +1,9 @@
+{
+  "$id": "engines/unified-participant-impact-timeslice-engine.json",
+  "type": "object",
+  "title": "UnifiedParticipantImpactTimesliceEngine",
+  "properties": {
+    "engine_id": { "const": "unified_participant_impact_timeslice_engine" }
+  },
+  "required": ["engine_id"]
+}

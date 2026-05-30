@@ -1,0 +1,15 @@
+{
+  "id": "heatmap.governance_risk.*",
+  "dimensions": ["participant", "jurisdiction", "layer", "instrument_type"],
+  "cells": [
+    {
+      "participant_id": "entity.*",
+      "jurisdiction_id": "jurisdiction.*",
+      "layer": "treaty | law | policy",
+      "instrument_type": "treaty | law.federal | law.state | law.local | policy.org",
+      "risk_level": "none | low | medium | high",
+      "risk_count": "integer",
+      "high_risk_item_count": "integer"
+    }
+  ]
+}

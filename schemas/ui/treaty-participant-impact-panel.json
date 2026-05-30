@@ -1,0 +1,14 @@
+{
+  "$id": "ui/treaty-participant-impact-panel.json",
+  "type": "object",
+  "title": "TreatyParticipantImpactPanel",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.treaty_participant_impact_panel\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.treaty_participant_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

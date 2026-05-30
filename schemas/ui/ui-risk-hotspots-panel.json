@@ -1,0 +1,12 @@
+{
+  "id": "ui.risk_hotspots_panel.*",
+  "hotspots": [
+    {
+      "type": "participant | treaty | law | policy | jurisdiction",
+      "id": "string",
+      "label": "string",
+      "risk_level": "low | medium | high",
+      "linked_items": ["entity.* | treaty.* | law.* | policy.org.*"]
+    }
+  ]
+}

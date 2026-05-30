@@ -1,0 +1,11 @@
+{
+  "id": "ui.layer_status_overview.*",
+  "layers": [
+    {
+      "layer": "treaty | law | policy",
+      "conflict_count": "integer",
+      "risk_count": "integer",
+      "status": "stable | strained | high_risk"
+    }
+  ]
+}

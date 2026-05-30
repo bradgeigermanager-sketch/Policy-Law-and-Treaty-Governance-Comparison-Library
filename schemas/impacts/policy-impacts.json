@@ -1,0 +1,13 @@
+{
+  "$id": "impacts/policy-impacts.json",
+  "type": "object",
+  "title": "PolicyImpact",
+  "properties": {
+    "id": { "type": "string", "pattern": "^impact\\.policy_" },
+    "participant_id": { "type": "string", "pattern": "^entity\\." },
+    "policy_id": { "type": "string", "pattern": "^policy\\.org\\." },
+    "rule_id": { "type": "string", "pattern": "^rule\\.policy\\." },
+    "description": { "type": "string" }
+  },
+  "required": ["id", "participant_id", "policy_id", "rule_id"]
+}

@@ -1,0 +1,14 @@
+{
+  "$id": "ui/risk-hotspots-panel.json",
+  "type": "object",
+  "title": "RiskHotspotsPanel",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.risk_hotspots_panel\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.risk_hotspot_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

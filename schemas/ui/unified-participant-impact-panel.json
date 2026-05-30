@@ -1,0 +1,14 @@
+{
+  "$id": "ui/unified-participant-impact-panel.json",
+  "type": "object",
+  "title": "UnifiedParticipantImpactPanel",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.unified_participant_impact_panel\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.unified_participant_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

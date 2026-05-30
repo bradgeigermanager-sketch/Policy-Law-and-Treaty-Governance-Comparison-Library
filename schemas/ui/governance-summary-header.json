@@ -1,0 +1,10 @@
+{
+  "id": "ui.governance_summary_header.*",
+  "global_metrics": {
+    "participant_count": "integer",
+    "unified_high_risk_participant_count": "integer",
+    "total_unified_conflict_count": "integer",
+    "total_unified_risk_count": "integer"
+  },
+  "last_evaluated_at": "datetime"
+}

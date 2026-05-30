@@ -1,0 +1,23 @@
+{
+  "id": "scenario.governance.demo1",
+  "label": "Add new data protection treaty and align state law",
+  "changes": [
+    {
+      "type": "add_treaty",
+      "target_id": "treaty.data_protection",
+      "details": {}
+    },
+    {
+      "type": "add_law",
+      "target_id": "law.state.data_protection_wy",
+      "details": {}
+    },
+    {
+      "type": "change_participation",
+      "target_id": "entity.company_X",
+      "details": {
+        "join_treaties": ["treaty.data_protection"]
+      }
+    }
+  ]
+}

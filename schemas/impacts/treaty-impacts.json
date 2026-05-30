@@ -1,0 +1,13 @@
+{
+  "$id": "impacts/treaty-impacts.json",
+  "type": "object",
+  "title": "TreatyImpact",
+  "properties": {
+    "id": { "type": "string", "pattern": "^impact\\.obligation\\.|^impact\\.limitation\\." },
+    "party_id": { "type": "string", "pattern": "^party\\." },
+    "treaty_id": { "type": "string", "pattern": "^treaty\\." },
+    "rule_id": { "type": "string", "pattern": "^rule\\.treaty\\." },
+    "description": { "type": "string" }
+  },
+  "required": ["id", "party_id", "treaty_id", "rule_id"]
+}

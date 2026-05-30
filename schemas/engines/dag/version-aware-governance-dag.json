@@ -1,0 +1,17 @@
+{
+  "$id": "engines/version-aware-governance-dag.json",
+  "type": "object",
+  "title": "VersionAwareGovernanceDAG",
+  "properties": {
+    "dag_id": { "type": "string", "pattern": "^dag\\.governance_version_aware\\." },
+    "nodes": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  },
+  "required": ["dag_id", "nodes", "edges"]
+}

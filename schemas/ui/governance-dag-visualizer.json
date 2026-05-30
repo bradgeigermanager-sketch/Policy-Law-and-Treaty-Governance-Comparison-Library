@@ -1,0 +1,14 @@
+{
+  "$id": "ui/governance-dag-visualizer.json",
+  "type": "object",
+  "title": "GovernanceDAGVisualizer",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.governance_dag_visualizer\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.dag_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "impact_state.multi_layer.*",
+  "participant_id": "entity.*",
+  "target": "impact_target.*",
+  "layers": [
+    {
+      "layer": "treaty | law | policy",
+      "source_id": "treaty.* | law.* | policy.org.*",
+      "effect_type": "obligation | right | limitation | prohibition | permission | requirement",
+      "conditional_on": ["term.*"],
+      "status": "active | conditional | inactive"
+    }
+  ],
+  "combined_effect": {
+    "net_status": "allowed | prohibited | required | ambiguous | conflicting",
+    "explanation": "string"
+  }
+}

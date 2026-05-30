@@ -1,0 +1,9 @@
+{
+  "$id": "engines/policy-impact-engine.json",
+  "type": "object",
+  "title": "PolicyImpactEngine",
+  "properties": {
+    "engine_id": { "const": "policy_impact_engine" }
+  },
+  "required": ["engine_id"]
+}

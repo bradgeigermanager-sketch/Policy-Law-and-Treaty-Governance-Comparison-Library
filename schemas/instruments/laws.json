@@ -1,0 +1,14 @@
+{
+  "$id": "instruments/laws.json",
+  "type": "object",
+  "title": "Law",
+  "properties": {
+    "id": { "type": "string", "pattern": "^law\\." },
+    "label": { "type": "string" },
+    "layer": {
+      "type": "string",
+      "enum": ["federal", "state", "local"]
+    }
+  },
+  "required": ["id", "label", "layer"]
+}

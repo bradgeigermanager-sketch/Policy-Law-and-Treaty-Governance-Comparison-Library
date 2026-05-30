@@ -1,0 +1,14 @@
+{
+  "$id": "ui/version-diff-viewer.json",
+  "type": "object",
+  "title": "VersionDiffViewer",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.version_diff_viewer\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.version_diff_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

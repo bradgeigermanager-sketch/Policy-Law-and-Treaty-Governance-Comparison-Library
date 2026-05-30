@@ -1,0 +1,6 @@
+{
+  "id": "impact_target.*",
+  "target_type": "right | obligation | activity | resource | process | state_variable",
+  "target_id": "string",
+  "label": "string"
+}

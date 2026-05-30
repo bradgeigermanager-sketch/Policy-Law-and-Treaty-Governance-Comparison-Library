@@ -1,0 +1,13 @@
+{
+  "$id": "instruments/policy-versions.json",
+  "type": "object",
+  "title": "PolicyVersion",
+  "properties": {
+    "id": { "type": "string", "pattern": "^policy_version\\." },
+    "policy_id": { "type": "string", "pattern": "^policy\\.org\\." },
+    "version": { "type": "string" },
+    "effective_from": { "type": "string", "format": "date-time" },
+    "effective_to": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "required": ["id", "policy_id", "version", "effective_from"]
+}

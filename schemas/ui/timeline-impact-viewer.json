@@ -1,0 +1,14 @@
+{
+  "$id": "ui/timeline-impact-viewer.json",
+  "type": "object",
+  "title": "TimelineImpactViewer",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.timeline_impact_viewer\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.timeline_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

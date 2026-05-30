@@ -1,0 +1,81 @@
+name: TypeScript Schema Loader & Type Generator
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  generate-types:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm install -g typescript
+          npm install -g json-schema-to-typescript
+          mkdir -p dist/types
+          mkdir -p dist/schemas
+
+      - name: Copy schemas to dist
+        run: |
+          cp -R schemas dist/schemas
+
+      - name: Generate TypeScript types from JSON Schemas
+        run: |
+          echo "Generating TypeScript types..."
+          find schemas -name "*.json" | while read schema; do
+            out="dist/types/$(basename "$schema" .json).d.ts"
+            json2ts -i "$schema" -o "$out"
+          done
+
+      - name: Build schema loader index.ts
+        run: |
+          echo "Building schema loader..."
+          echo "// AUTO-GENERATED FILE" > dist/types/index.ts
+          echo "// Loads all JSON Schemas and their TypeScript types" >> dist/types/index.ts
+          echo "" >> dist/types/index.ts
+
+          find schemas -name "*.json" | while read schema; do
+            base=$(basename "$schema" .json)
+            safe=$(echo "$base" | sed 's/[^a-zA-Z0-9_]/_/g')
+            echo "import $safe from '../schemas/${schema#schemas/}';" >> dist/types/index.ts
+          done
+
+          echo "" >> dist/types/index.ts
+          echo "export const Schemas = {" >> dist/types/index.ts
+
+          find schemas -name "*.json" | while read schema; do
+            base=$(basename "$schema" .json)
+            safe=$(echo "$base" | sed 's/[^a-zA-Z0-9_]/_/g')
+            echo "  \"$base\": $safe," >> dist/types/index.ts
+          done
+
+          echo "};" >> dist/types/index.ts
+
+      - name: Compile TypeScript
+        run: |
+          echo "Compiling TypeScript..."
+          tsc --init --rootDir dist/types --outDir dist/types-compiled
+          tsc
+
+      - name: Upload generated types
+        uses: actions/upload-artifact@v4
+        with:
+          name: typescript-schema-types
+          path: dist/types
+
+      - name: Upload compiled loader
+        uses: actions/upload-artifact@v4
+        with:
+          name: typescript-schema-loader
+          path: dist/types-compiled

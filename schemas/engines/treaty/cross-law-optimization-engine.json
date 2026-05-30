@@ -1,0 +1,9 @@
+{
+  "$id": "engines/cross-law-optimization-engine.json",
+  "type": "object",
+  "title": "CrossLawOptimizationEngine",
+  "properties": {
+    "engine_id": { "const": "cross_law_optimization_engine" }
+  },
+  "required": ["engine_id"]
+}

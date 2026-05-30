@@ -1,0 +1,14 @@
+{
+  "$id": "ui/scenario-builder-panel.json",
+  "type": "object",
+  "title": "ScenarioBuilderPanel",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.scenario_builder_panel\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.scenario_builder_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

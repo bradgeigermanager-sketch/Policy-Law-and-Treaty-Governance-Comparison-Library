@@ -1,0 +1,14 @@
+{
+  "$id": "ui/law-participant-impact-panel.json",
+  "type": "object",
+  "title": "LawParticipantImpactPanel",
+  "properties": {
+    "id": { "type": "string", "pattern": "^ui\\.law_participant_impact_panel\\." },
+    "type": { "const": "panel" },
+    "sections": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ui\\.law_participant_" }
+    }
+  },
+  "required": ["id", "type", "sections"]
+}

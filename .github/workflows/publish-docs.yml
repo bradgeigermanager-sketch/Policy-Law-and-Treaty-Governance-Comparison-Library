@@ -44,6 +44,19 @@ jobs:
             base=$(basename "$file" .md)
             echo "- [$base]($base.md)" >> docs/generated/index.md
           done
+					
+			- name: Build search index
+			  run: |
+ 			   echo '{ "docs": [' > docs/search-index.json
+ 			   first=true
+			   find docs/generated -name "*.md" | while read file; do
+   			   if [ "$first" = true ]; then first=false; else echo ',' >> docs/search-index.json; fi
+     			 id=$(basename "$file" .md)
+    		   title=$(head -n 1 "$file" | sed 's/# //')
+    			 body=$(sed '1d' "$file" | tr '\n' ' ' | sed 's/"/\\"/g')
+   			   echo "{ \"id\": \"$id\", \"title\": \"$title\", \"body\": \"$body\" }" >> docs/search-index.json
+    			done
+  			  echo ']}' >> docs/search-index.json
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

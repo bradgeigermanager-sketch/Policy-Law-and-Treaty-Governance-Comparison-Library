@@ -1,0 +1,63 @@
+name: Publish Documentation to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install tools
+        run: |
+          npm install -g json-schema-to-markdown
+          mkdir -p docs/generated
+
+      - name: Generate Markdown docs
+        run: |
+          find schemas -name "*.json" | while read schema; do
+            base=$(basename "$schema" .json)
+            json-schema-to-markdown "$schema" > "docs/generated/$base.md"
+          done
+
+      - name: Build index
+        run: |
+          echo "# Governance‑OS Documentation" > docs/generated/index.md
+          echo "" >> docs/generated/index.md
+          echo "Auto‑generated from JSON Schemas." >> docs/generated/index.md
+          echo "" >> docs/generated/index.md
+          find docs/generated -name "*.md" ! -name "index.md" | sort | while read file; do
+            base=$(basename "$file" .md)
+            echo "- [$base]($base.md)" >> docs/generated/index.md
+          done
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/generated
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

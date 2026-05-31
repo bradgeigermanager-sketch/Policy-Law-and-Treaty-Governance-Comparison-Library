@@ -1,0 +1,89 @@
+name: Release Automation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "schemas/**"
+      - "docs/**"
+      - "examples/**"
+      - ".github/workflows/**"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install release tools
+        run: |
+          npm install -g conventional-changelog-cli
+          npm install -g semver
+
+      - name: Determine next version
+        id: version
+        run: |
+          latest=$(git tag --sort=-v:refname | head -n 1)
+          if [ -z "$latest" ]; then
+            latest="0.0.0"
+          fi
+
+          # Determine bump type based on commit messages
+          if git log -1 --pretty=%B | grep -qi "BREAKING CHANGE"; then
+            bump="major"
+          elif git log -1 --pretty=%B | grep -qiE "feat|feature"; then
+            bump="minor"
+          else
+            bump="patch"
+          fi
+
+          next=$(semver -i $bump $latest)
+          echo "next_version=$next" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog
+        run: |
+          conventional-changelog -p angular -i CHANGELOG.md -s
+
+      - name: Commit changelog
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add CHANGELOG.md
+          git commit -m "docs: update changelog for release"
+
+      - name: Tag release
+        run: |
+          git tag -a "v${{ steps.version.outputs.next_version }}" -m "Release v${{ steps.version.outputs.next_version }}"
+          git push --tags
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: "v${{ steps.version.outputs.next_version }}"
+          release_name: "Governance‑OS v${{ steps.version.outputs.next_version }}"
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload schema bundle
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./schemas
+          asset_name: schemas-v${{ steps.version.outputs.next_version }}.zip
+          asset_content_type: application/zip
